@@ -1,0 +1,295 @@
+databaseChangeLog:
+- changeSet:
+      id: 1
+      author: root
+      changes:
+      - createTable:
+              tableName: department
+              columns:
+              - column:
+                      name: id
+                      type: long
+                      autoIncrement: true
+                      constraints:
+                            primaryKey: true
+                            nullable: false
+              - column:
+                      name: name
+                      type: varchar(50)
+                      constraints:
+                        nullable: false
+- changeSet:
+      id: 2
+      author: root
+      changes:
+      - insert:
+            tableName: department
+            columns:
+            - column:
+                  name: id
+                  value: "1"
+            - column:
+                    name: name
+                    value: "Разработка"
+      - insert:
+              tableName: department
+              columns:
+              - column:
+                      name: id
+                      value: "2"
+              - column:
+                      name: name
+                      value: "Маркетинг"
+      - insert:
+              tableName: department
+              columns:
+              - column:
+                      name: id
+                      value: "3"
+              - column:
+                      name: name
+                      value: "Тестирование"
+- changeSet:
+      id: 3
+      author: root
+      changes:
+      - createTable:
+            tableName: job
+            columns:
+            - column:
+                  name: id
+                  type: long
+                  autoIncrement: true
+                  constraints:
+                        primaryKey: true
+                        nullable: false
+            - column:
+                  name: name
+                  type: varchar(50)
+                  constraints:
+                    nullable: false
+            - column:
+                  name: hours
+                  type: int
+                  constraints:
+                    nullable: false
+            - column:
+                    name: department_id
+                    type: long
+                    constraints:
+                          nullable: false
+                          foreignKeyName: fk_department_job
+                          references: department(id)
+- changeSet:
+      id: 4
+      author: root
+      changes:
+      - insert:
+            tableName: job
+            columns:
+            - column:
+                  name: id
+                  value: "1"
+            - column:
+                  name: name
+                  value: "Директор"
+            - column:
+                  name: hours
+                  value: "45"
+            - column:
+                    name: department_id
+                    value: "1"
+      - insert:
+            tableName: job
+            columns:
+            - column:
+                  name: id
+                  value: "2"
+            - column:
+                  name: name
+                  value: "Программист"
+            - column:
+                    name: hours
+                    value: "30"
+            - column:
+                    name: department_id
+                    value: "1"
+
+      - insert:
+              tableName: job
+              columns:
+              - column:
+                      name: id
+                      value: "3"
+              - column:
+                      name: name
+                      value: "Маркетолог"
+              - column:
+                      name: hours
+                      value: "25"
+              - column:
+                      name: department_id
+                      value: "2"
+      - insert:
+              tableName: job
+              columns:
+              - column:
+                      name: id
+                      value: "4"
+              - column:
+                      name: name
+                      value: "Тестировщик"
+              - column:
+                      name: hours
+                      value: "20"
+              - column:
+                      name: department_id
+                      value: "3"
+- changeSet:
+        id: 5
+        author: root
+        changes:
+        - createTable:
+                tableName: officer
+                columns:
+                - column:
+                        name: id
+                        type: long
+                        autoIncrement: true
+                        constraints:
+                              primaryKey: true
+                              nullable: false
+                - column:
+                        name: firstName
+                        type: varchar(50)
+                        constraints:
+                          nullable: false
+                - column:
+                        name: lastName
+                        type: varchar(50)
+                        constraints:
+                          nullable: false
+                - column:
+                        name: birthday
+                        type: Date
+                        constraints:
+                          nullable: false
+                - column:
+                        name: job_id
+                        type: long
+                        constraints:
+                              nullable: false
+                              foreignKeyName: fk_job_officer
+                              references: job(id)
+- changeSet:
+        id: 6
+        author: root
+        changes:
+        - insert:
+                tableName: officer
+                columns:
+                - column:
+                        name: id
+                        value: "1"
+                - column:
+                        name: firstName
+                        value: "Валерий"
+                - column:
+                        name: lastName
+                        value: "Жмышенко"
+                - column:
+                        name: birthday
+                        value: "1974-01-01"
+                - column:
+                        name: job_id
+                        value: "1"
+        - insert:
+                tableName: officer
+                columns:
+                - column:
+                        name: id
+                        value: "2"
+                - column:
+                        name: firstName
+                        value: "Олег"
+                - column:
+                        name: lastName
+                        value: "Монгол"
+                - column:
+                        name: birthday
+                        value: "1980-11-21"
+                - column:
+                        name: job_id
+                        value: "2"
+        - insert:
+                tableName: officer
+                columns:
+                - column:
+                        name: id
+                        value: "3"
+                - column:
+                        name: firstName
+                        value: "Руслан"
+                - column:
+                        name: lastName
+                        value: "Гительман"
+                - column:
+                        name: birthday
+                        value: "1985-08-11"
+                - column:
+                        name: job_id
+                        value: "3"
+        - insert:
+                tableName: officer
+                columns:
+                - column:
+                        name: id
+                        value: "4"
+                - column:
+                        name: firstName
+                        value: "Павел"
+                - column:
+                        name: lastName
+                        value: "Безумный"
+                - column:
+                        name: birthday
+                        value: "1986-11-05"
+                - column:
+                        name: job_id
+                        value: "4"
+- changeSet:
+        id: 7
+        author: root
+        changes:
+        - createTable:
+                tableName: history
+                columns:
+                - column:
+                        name: id
+                        type: long
+                        autoIncrement: true
+                        constraints:
+                              primaryKey: true
+                              nullable: false
+                - column:
+                        name: Date
+                        type: Date
+                        constraints:
+                          nullable: false
+                - column:
+                        name: Time
+                        type: Time
+                        constraints:
+                          nullable: false
+                - column:
+                        name: status
+                        type: boolean
+                        constraints:
+                          nullable: false
+                - column:
+                        name: officer_id
+                        type: long
+                        constraints:
+                              nullable: false
+                              foreignKeyName: fk_officer_history
+                              references: officer(id)
